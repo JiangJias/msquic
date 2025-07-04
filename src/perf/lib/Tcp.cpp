@@ -704,6 +704,9 @@ bool TcpConnection::InitializeTls()
 {
     const uint32_t LocalTPLength = 2;
     uint8_t* LocalTP = (uint8_t*)CXPLAT_ALLOC_NONPAGED(CxPlatTlsTPHeaderSize + LocalTPLength, QUIC_POOL_TLS_TRANSPARAMS);
+    if (!LocalTP) {
+        return false;
+    }
     CxPlatZeroMemory(LocalTP, LocalTPLength);
 
     CXPLAT_TLS_CONFIG Config;
